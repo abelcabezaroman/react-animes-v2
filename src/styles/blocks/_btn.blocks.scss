@@ -1,0 +1,10 @@
+.b-btn{
+    background-color: #333;
+    color: var(--color-primary);
+    border: 0;
+    padding: 8px;
+    &--selected{
+        background-color: var(--color-primary);
+        color: #333;
+    }
+}
