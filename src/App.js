@@ -8,18 +8,20 @@ import ContactPage from "./pages/ContactPage/ContactPage";
 import { LoadingContext } from "./contexts/LoadingContext";
 import Loading from "./components/Loading/Loading";
 import { useState } from "react";
-import BackgroundPlayer from "./components/BackgroundPlayer/BackgroundPlayer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
 
+  // const name = "Abel";
+  // const profe = {name}
+  // const profe = {name: name}
   return (
     <Router>
       <Menu />
-      <Loading isLoading={isLoading} />
 
       <div className="mt-5 container">
-        <LoadingContext.Provider value={{ setIsLoading }}>
+        <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+          <Loading />
 
           <Routes>
             <Route path="/" element={<HomePage />} />

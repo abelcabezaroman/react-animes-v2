@@ -1,12 +1,10 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Gallery from "../../components/Gallery/Gallery";
 import Pagination from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search";
-import Slider from "../../components/Slider/Slider";
 import { LoadingContext } from "../../contexts/LoadingContext";
 
 export default function AnimesPage() {
@@ -18,7 +16,7 @@ export default function AnimesPage() {
   //     console.log(resData.data);
   // }
 
-  const getAnimes = async (offset = 12, animeSlugFiter = "") => {
+  const getAnimes = useCallback(async (offset = 12, animeSlugFiter = "") => {
     setIsLoading(true);
     const res = await axios.get(
       `https://kitsu.io/api/edge/anime?page%5Blimit%5D=12&page%5Boffset%5D=${offset}${animeSlugFiter}`
@@ -26,11 +24,12 @@ export default function AnimesPage() {
 
     setAnimes(res.data.data);
     setIsLoading(false);
-  };
+  }, [setIsLoading]);
 
   useEffect(() => {
     getAnimes();
-  }, []);
+  }, [getAnimes]);
+  
   return (
     <div>
       {/* {animes.length !== 0 && <div className="mb-5"><Slider slides={animes}/></div>} */}
