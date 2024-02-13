@@ -16,7 +16,7 @@ export default function AnimesPage() {
   //     console.log(resData.data);
   // }
 
-  const getAnimes = useCallback(async (offset = 12, animeSlugFiter = "") => {
+  const getAnimes =async (offset = 12, animeSlugFiter = "") => {
     setIsLoading(true);
     const res = await axios.get(
       `https://kitsu.io/api/edge/anime?page%5Blimit%5D=12&page%5Boffset%5D=${offset}${animeSlugFiter}`
@@ -24,11 +24,11 @@ export default function AnimesPage() {
 
     setAnimes(res.data.data);
     setIsLoading(false);
-  }, [setIsLoading]);
+  }
 
   useEffect(() => {
     getAnimes();
-  }, [getAnimes]);
+  }, []);
   
   return (
     <div>
